@@ -101,6 +101,7 @@ class Events extends Component {
                             events={this.state.events}
                             culture={this.state.culture}
                             defaultDate={new Date(2015, 3, 1)}
+                            popup={true}
                         />
                     </div>
                 </div>
