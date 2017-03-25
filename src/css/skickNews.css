@@ -13,10 +13,13 @@ height: 200px;
     background-position: center;
     background-repeat: no-repeat;
 }
-.center .slick-center > div {
+.center .slick-center > div > div {
     opacity: 1;
     transform: scale(1.08);
 }
+/*.slick-slide {*/
+    /*transition: transform .3s;*/
+/*}*/
 .slick-dots {
     margin-left: 0;
 }

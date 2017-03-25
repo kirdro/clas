@@ -85,6 +85,20 @@ var projectsArray = [
         file: [],
         favouriteProjects: true,
         futureProject: true
+    },
+    {
+        urlImg: [
+            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
+            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
+        ],
+        title: 'Hello',
+        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
+        videosId: ['CdGgqC3iqcE'],
+        id: 4,
+        file: [],
+        favouriteProjects: true,
+        futureProject: true
     }
 ]
 
@@ -97,6 +111,11 @@ class GalleryBox extends Component {
         if (this.props.mode === 'gallery') {
             componentList = GalleryArray.map((prop, id) => {
                 return (<GalleryItem mode="gallery" prop={prop} key={id} />)
+            })
+        }
+        else if (this.props.mode === 'projects') {
+            componentList = GalleryArray.map((prop, id) => {
+                return (<GalleryItem mode="projects" prop={prop} key={id} />)
             })
         }
         return (
