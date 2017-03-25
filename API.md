@@ -11,8 +11,8 @@
             }]
 #### API gallery:
 
-[
-   {
+            [
+            {
            urlImg: [
                'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
                'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
@@ -52,7 +52,7 @@
     }
     ]
 #### API about:
-{
+            {
     "title":"about",
     "disc":"fgasdasd",
     "subtitle":"subtitle",
@@ -65,9 +65,9 @@
     img:['url'],
     file:['file'],
     'author':"dfsada"
-}
+            }
 #### API projects:
-[
+            [
     {
             urlImg: [
                 'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
@@ -82,26 +82,26 @@
             favouriteProjects: true,
             futureProject: true
         }
-]
+            ]
 #### API partners:
-[
-{
+            [
+            {
     "url":"url",
     "imgUrl":"url"
-}
-]
+            }
+            ]
 #### API home:
-{
-"title":"hello",
-"disc":"disc",
-"urlImgTop":"url",
-"phone":"98902834",
-"email":"email",
-"address":"fafsdf",
-"vk":"URL",
-"fb":"url",
-"instagram":"",
-"telegramm":"",
-"youtube":""
-}
+            {
+            "title":"hello",
+            "disc":"disc",
+            "urlImgTop":"url",
+            "phone":"98902834",
+            "email":"email",
+            "address":"fafsdf",
+            "vk":"URL",
+            "fb":"url",
+            "instagram":"",
+            "telegramm":"",
+            "youtube":""
+            }
 
