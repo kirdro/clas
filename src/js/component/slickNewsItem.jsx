@@ -20,8 +20,8 @@ class SlickNewsItem extends Component {
                 }}
                      className="boxNewsItem">
                     <div className="hoverDiscriptionNews">
-                        <h3>Hello</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?</p>
+                        <h3>{this.props.prop.title}</h3>
+                        <p>{this.props.prop.disc}</p>
                     </div>
                 </div>
             </div>
