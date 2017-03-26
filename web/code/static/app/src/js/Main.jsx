@@ -3,9 +3,9 @@ import React, {
     PropTypes,
 } from 'react';
 import ReactDOM from 'react-dom';
-import Header from '../../../../../../src/js/component/header';
-import EitherBox from '../../../../../../src/js/component/eitherBox';
-import FlagShip from '../../../../../../src/js/component/flagShip';
+import Header from './component/header';
+import EitherBox from './component/eitherBox';
+import FlagShip from './component/flagShip';
 import SlickNews from './component/slickNews';
 import TopProject from './component/topProject';
 import Footer from './component/footer';

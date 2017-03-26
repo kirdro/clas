@@ -70,6 +70,32 @@ gulp.task('browserify2', function() {
         .pipe(source('main.js'))
         .pipe(buffer())
         // .pipe(jsmin())
+        .pipe(gulp.dest('dist/js'));
+    // 	gulp.src('src/js/Main.jsx')
+    // 	.pipe(browserify({transform:['reactify'],
+    // extensions: ['.js']}))
+    // 	.pipe(concat('main2.js'))
+    // 	.pipe(gulp.dest('public'))
+    // .pipe(livereload());
+});
+gulp.task('browserify3', function() {
+    return browserify('src/js/Main.jsx', {
+        debug: true,
+        extensions: ['.jsx', '.js']
+    }).transform(babelify.configure({
+        presets: [es2015, babelReact, es2016, es2017]
+    })).bundle()
+        .on('error', notify.onError(function(err) {
+            return {
+                title: "Gulp",
+                message: err.message,
+                sound: "Beep",
+                subTitle: err.name
+            };
+        }))
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        // .pipe(jsmin())
         .pipe(gulp.dest('dist/static/js'));
     // 	gulp.src('src/js/Main.jsx')
     // 	.pipe(browserify({transform:['reactify'],
@@ -80,6 +106,18 @@ gulp.task('browserify2', function() {
 });
 
 gulp.task('styles', function() {
+    return gulp.src('src/css/**/*.*')
+        .pipe(cached('styles'))
+        .pipe(sourcemaps.init())
+        .pipe(remember('styles'))
+        .pipe(concat('main.css'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(debug({
+            title: 'dest'
+        }));
+})
+gulp.task('styles2', function() {
     return gulp.src('src/css/**/*.*')
         .pipe(cached('styles'))
         .pipe(sourcemaps.init())
@@ -146,10 +184,22 @@ gulp.task('copyImg', function() {
     return gulp.src('src/img/**/*.*')
         .pipe(cached('copyImg'))
         .pipe(remember('copyImg'))
+        .pipe(gulp.dest('dist/img'));
+});
+gulp.task('copyImg2', function() {
+    return gulp.src('src/img/**/*.*')
+        .pipe(cached('copyImg'))
+        .pipe(remember('copyImg'))
         .pipe(gulp.dest('dist/static/img'));
 });
 
 gulp.task('copyLib', function() {
+    return gulp.src('src/scripts/**/*.*')
+        .pipe(cached('copyLib'))
+        .pipe(remember('copyLib'))
+        .pipe(gulp.dest('dist/scripts'));
+});
+gulp.task('copyLib2', function() {
     return gulp.src('src/scripts/**/*.*')
         .pipe(cached('copyLib'))
         .pipe(remember('copyLib'))
@@ -185,17 +235,17 @@ gulp.task('watch', function() {
         remember.forget('copyHtml', path.resolve(filepath));
         delete cached.caches.copyHtml[path.resolve(filepath)];
     });
-    gulp.watch('src/css/**/*.*', gulp.series('styles')).on('unlink', function(filepath) {
-        remember.forget('styles', path.resolve(filepath));
-        delete cached.caches.styles[path.resolve(filepath)];
+    gulp.watch('src/css/**/*.*', gulp.series('styles2')).on('unlink', function(filepath) {
+        remember.forget('styles2', path.resolve(filepath));
+        delete cached.caches.styles2[path.resolve(filepath)];
     });
-    gulp.watch('src/img/**/*.*', gulp.series('copyImg')).on('unlink', function(filepath) {
-        remember.forget('copyImg', path.resolve(filepath));
-        delete cached.caches.copyImg[path.resolve(filepath)];
+    gulp.watch('src/img/**/*.*', gulp.series('copyImg2')).on('unlink', function(filepath) {
+        remember.forget('copyImg2', path.resolve(filepath));
+        delete cached.caches.copyImg2[path.resolve(filepath)];
     });
-    gulp.watch('src/js/**/*.*', gulp.series('browserify2')).on('unlink', function(filepath) {
-        remember.forget('browserify2', path.resolve(filepath));
-        delete cached.caches.browserify2[path.resolve(filepath)];
+    gulp.watch('src/js/**/*.*', gulp.series('browserify3')).on('unlink', function(filepath) {
+        remember.forget('browserify3', path.resolve(filepath));
+        delete cached.caches.browserify3[path.resolve(filepath)];
     });
     gulp.watch('src/js/**/*.*', gulp.series('rev2')).on('unlink', function(filepath) {
         remember.forget('rev2', path.resolve(filepath));
@@ -205,12 +255,12 @@ gulp.task('watch', function() {
         remember.forget('rev2', path.resolve(filepath));
         delete cached.caches.rev2[path.resolve(filepath)];
     });
-    gulp.watch('src/scripts/**/*.*', gulp.series('copyLib')).on('unlink', function(filepath) {
-        remember.forget('copyLib', path.resolve(filepath));
-        delete cached.caches.copyImg[path.resolve(filepath)];
+    gulp.watch('src/scripts/**/*.*', gulp.series('copyLib2')).on('unlink', function(filepath) {
+        remember.forget('copyLib2', path.resolve(filepath));
+        delete cached.caches.copyLib2[path.resolve(filepath)];
     });
 })
 
 
-gulp.task('default', gulp.series('clean', gulp.parallel('copyHtml', 'styles', 'copyImg', 'browserify2', 'copyLib', 'copyAdmin'), gulp.parallel('serve','rev2', 'watch')));
+gulp.task('default', gulp.series('clean', gulp.parallel('copyHtml', 'styles', 'styles2', 'copyImg','copyImg2', 'browserify2','browserify3', 'copyLib','copyLib2', 'copyAdmin'), gulp.parallel('serve','rev2', 'watch')));
 gulp.task('prod', gulp.series('clean', [gulp.parallel('copyHtml', 'stylesProd', 'copyImg',  'browserifyProd', 'copyLib'), gulp.parallel('serve', 'rev2')]));
