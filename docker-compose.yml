@@ -1,0 +1,19 @@
+version: '2'
+services:
+  db:
+    restart: always
+    image: postgres:9.5
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+  web:
+    restart: always
+    build: ./web/
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./web/code/:/code
+    ports:
+      - "8003:8000"
+    links:
+      - db
+    depends_on:
+      - db
