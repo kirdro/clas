@@ -33,6 +33,10 @@ var minify = require('gulp-babel-minify');
 var cssmin = require('gulp-cssmin');
 var minifyGulp = require('gulp-minify');
 var babelify = require("babelify");
+var es2015 = require('babel-preset-es2015');
+var es2016 = require('babel-preset-es2016');
+var es2017 = require('babel-preset-es2017');
+var babelReact = require('babel-preset-react');
 
 gulp.task('copyHtml', function() {
     return gulp.src('src/*.html')
@@ -53,7 +57,7 @@ gulp.task('browserify2', function() {
         debug: true,
         extensions: ['.jsx', '.js']
     }).transform(babelify.configure({
-        presets: ["es2015", "react", "es2016"]
+        presets: [es2015, babelReact, es2016, es2017]
     })).bundle()
         .on('error', notify.onError(function(err) {
             return {
@@ -66,7 +70,7 @@ gulp.task('browserify2', function() {
         .pipe(source('main.js'))
         .pipe(buffer())
         // .pipe(jsmin())
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/static/js'));
     // 	gulp.src('src/js/Main.jsx')
     // 	.pipe(browserify({transform:['reactify'],
     // extensions: ['.js']}))
@@ -82,7 +86,7 @@ gulp.task('styles', function() {
         .pipe(remember('styles'))
         .pipe(concat('main.css'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('dist/static/css'))
         .pipe(debug({
             title: 'dest'
         }));
@@ -117,7 +121,12 @@ gulp.task('browserifyProd', function() {
     // 	.pipe(gulp.dest('public'))
     // .pipe(livereload());
 });
-
+gulp.task('copyAdmin', function () {
+    return gulp.src('src/admin/**/*.*')
+        .pipe(cached('copyAdmin'))
+        .pipe(remember('copyAdmin'))
+        .pipe(gulp.dest('dist/admin'));
+});
 gulp.task('stylesProd', function() {
     return gulp.src('src/css/**/*.*')
         .pipe(cached('styles'))
@@ -137,14 +146,14 @@ gulp.task('copyImg', function() {
     return gulp.src('src/img/**/*.*')
         .pipe(cached('copyImg'))
         .pipe(remember('copyImg'))
-        .pipe(gulp.dest('dist/img'));
+        .pipe(gulp.dest('dist/static/img'));
 });
 
 gulp.task('copyLib', function() {
     return gulp.src('src/scripts/**/*.*')
         .pipe(cached('copyLib'))
         .pipe(remember('copyLib'))
-        .pipe(gulp.dest('dist/scripts'));
+        .pipe(gulp.dest('dist/static/scripts'));
 });
 
 gulp.task('clean', function() {
@@ -203,5 +212,5 @@ gulp.task('watch', function() {
 })
 
 
-gulp.task('default', gulp.series('clean', gulp.parallel('copyHtml', 'styles', 'copyImg', 'browserify2', 'copyLib'), gulp.parallel('serve','rev2', 'watch')));
+gulp.task('default', gulp.series('clean', gulp.parallel('copyHtml', 'styles', 'copyImg', 'browserify2', 'copyLib', 'copyAdmin'), gulp.parallel('serve','rev2', 'watch')));
 gulp.task('prod', gulp.series('clean', [gulp.parallel('copyHtml', 'stylesProd', 'copyImg',  'browserifyProd', 'copyLib'), gulp.parallel('serve', 'rev2')]));
