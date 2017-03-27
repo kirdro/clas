@@ -23,8 +23,19 @@ class EitherBox extends Component {
     componentWillUnmount() {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
+
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextState.about !== this.state.about) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
     render() {
-        // console.log('render', this.state.about);
+        console.log('render', this.state.about);
         var urlImage = 'https://pp.userapi.com/c419619/v419619515/5/EgumwQ36C1o.jpg';
         if (this.state.about[0] !== undefined) {
             urlImage = this.state.about[0].media[0].url;

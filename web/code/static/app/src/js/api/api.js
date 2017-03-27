@@ -30,7 +30,7 @@ var Api = {
 			url: url,
             type: 'GET',
 			success: function(data) {
-				console.log('ajax', data);
+				// console.log('ajax', data);
             	success(params ,data);
 	        }.bind(this),
 	        error: function(xhr, status, err) {
