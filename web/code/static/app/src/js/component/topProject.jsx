@@ -2,18 +2,59 @@ import React, {
     Component,
     PropTypes,
 } from 'react';
+import AppStore from '../store/store';
 
 class TopProject extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            futureProject: AppStore.getState().futureProject
+        }
+    }
+    onChangeState(){
+        this.setState({
+            futureProject: AppStore.getState().futureProject
+        });
+
+    }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextState.futureProject !== this.state.futureProject) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    componentDidMount() {
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
     render() {
+        // console.log('render', this.state.futureProject);
+        var url = null,
+        title = null,
+        desc = null;
+        if (this.state.futureProject !== null) {
+            for (var i = 0; i < this.state.futureProject.media.length; i++) {
+                if (this.state.futureProject.media[i].is_favorite === true) {
+                    if (this.state.futureProject.media[i].item_type === 'image') {
+                        url = this.state.futureProject.media[i].url;
+                    }
+                }
+            }
+            title = this.state.futureProject.title;
+            desc = this.state.futureProject.description;
+        }
         return (
-            <div className="span8">
-                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
+            <div className="span12">
+                <h3><a style={{color: '#333', cursor: 'pointer'}} href="">{title}</a></h3>
                 <p>
-                    <img src="http://ng72.ru/userfiles/images/image-10-2015/tachka.jpg" className="img-polaroid" style={{margin: '12px 0px'}} />
+                    <img src={url} className="img-polaroid" style={{margin: '12px 0px'}} />
                 </p>
-                <p>Content on this page is for presentation purposes only. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                <p>
+                    {desc}
                 </p>
             </div>
         );

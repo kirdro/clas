@@ -33,18 +33,32 @@ class FlagShip extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
-        console.log('render', this.state.favoriteProject);
+        // console.log('render', this.state.favoriteProject);
+        var url = null,
+        title = null,
+        desc = null;
+        if (this.state.favoriteProject !== null) {
+            for (var i = 0; i < this.state.favoriteProject.media.length; i++) {
+                if (this.state.favoriteProject.media[i].is_favorite === true) {
+                    if (this.state.favoriteProject.media[i].item_type === 'image') {
+                        url = this.state.favoriteProject.media[i].url;
+                    }
+                }
+            }
+            title = this.state.favoriteProject.title;
+            desc = this.state.favoriteProject.description.substr(0, 68) + '...';
+        }
         return (
-            <div id="decorative1" style={{position: 'relative', backgroundImage: 'url(https://pp.userapi.com/c623717/v623717515/23ca4/6D1RDYZbugM.jpg)'}}>
+            <div id="decorative1" style={{position: 'relative', backgroundImage: `url(${url})`}}>
                 <div className="container">
                     <div className="divPanel headerArea">
                         <div className="row-fluid">
                             <div className="span12">
                                 <div id="headerSeparator" />
                                 <div id="divHeaderText" className="page-content">
-                                    <div id="divHeaderLine1" className="divHeaderLine1">Клуб Любителей Активного Спорта!</div><br />
-                                    <div id="divHeaderLine2">2nd line header text for calling extra attention to featured content..</div><br />
-                                    <div id="divHeaderLine3"><a className="btn btn-large btn-primary" href="#">More Info</a></div>
+                                    <div id="divHeaderLine1" className="divHeaderLine1">{title}</div><br />
+                                    <div id="divHeaderLine2">{desc}</div><br />
+                                    <div id="divHeaderLine3"><a className="btn btn-large btn-primary" href="#">Подробнее</a></div>
                                 </div>
                                 <div id="headerSeparator2" />
                             </div>

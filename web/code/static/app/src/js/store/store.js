@@ -15,7 +15,8 @@ var state = {
     gallery:[],
     partner:[],
     favoriteProject: null,
-    futureProject: null
+    futureProject: null,
+    secondNews: null
 };
 
 
@@ -45,7 +46,7 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             for (var i = 0; i < data.length; i++) {
                 if (data[i].project_type === 'favorite') {
                     state.favoriteProject = data[i];
-                    console.log('store', data[i]);
+                    // console.log('store', data[i]);
                 }
                 else if (data[i].project_type === 'future') {
                     state.futureProject = data[i];
@@ -54,6 +55,8 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             state.projects = data;
         }
         else if (status === 'news') {
+            state.secondNews = data[data.length - 1];
+            // console.log('store', data);
             state.news = data;
         }
         else if (status === 'events') {
@@ -65,6 +68,10 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
         else if (status === 'partner') {
             state.partner = data;
         }
+        this.emitChangeToModuleListeners();
+    },
+    onClickNews: function (index) {
+        state.secondNews = state.news[index];
         this.emitChangeToModuleListeners();
     },
     getState: function() {

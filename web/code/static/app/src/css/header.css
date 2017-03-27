@@ -17,3 +17,15 @@ li.dropdown.active {
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle {
     background: rgb(64, 172, 98);
 }
+#divSiteTitle {
+    width: 283px;
+    height: 84px;
+    display: inline-block;
+    background: url(../img/KLASS_cherny.svg) no-repeat center;
+    background-size: 95%;
+}
+#divLogo {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: -3px;
+}

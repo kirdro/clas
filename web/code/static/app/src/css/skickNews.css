@@ -52,17 +52,21 @@ height: 200px;
     cursor: pointer;
     opacity: 0;
     transition: opacity .3s;
+    pointer-events: none;
 }
 .slick-center div.boxNewsItem:hover > .hoverDiscriptionNews {
     opacity: 1;
+    pointer-events: auto;
 }
 .center .slick-center > div h3, .center .slick-center > div p {
     color: rgb(227,227,186);
 }
-.hoverDiscriptionNews > h3 {
+.hoverDiscriptionNews > a > h3 {
     text-align: center;
+    font-size: 15px;
+
 }
-.hoverDiscriptionNews > p {
+.hoverDiscriptionNews > a > p {
     font-size: 11px;
 
 }

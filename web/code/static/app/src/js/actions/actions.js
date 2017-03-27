@@ -32,6 +32,9 @@ var Actions = {
                 console.error(err);
             }
         );
+    },
+    onClickNews: function (index) {
+        AppStore.onClickNews(index);
     }
 };
 export default Actions;

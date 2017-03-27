@@ -4,6 +4,8 @@ import React, {
 } from 'react';
 import Slider from 'react-slick';
 import SlickNewsItem from './slickNewsItem';
+import {Router, Route, Link} from 'react-router-dom';
+import AppStore from '../store/store';
 
 var SampleNextArrow = React.createClass({
     render: function() {
@@ -19,58 +21,28 @@ var SamplePrevArrow = React.createClass({
     }
 });
 
-var news = [
-    {
-        urlImg: 'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'https://sites.google.com/site/strasilkiru/_/rsrc/1361006166400/temnyj-les---2/DarkForest.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'http://www.rabstol.net/uploads/gallery/main/200/rabstol_net_forest_27.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'https://avatars.mds.yandex.net/get-pdb/33827/d1293761-f9c0-47f6-af86-ebcfeabb9302/s800',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'http://www.randrs.ru/photo/2-0/1810_wallpaper-.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    },
-    {
-        urlImg: 'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-        title: 'Hello',
-        disc: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque debitis dolores ducimus eveniet exercitationem modi natus quam quia soluta! Ab atque incidunt iure minus modi numquam pariatur repellat ullam?',
-        urlVideo: null
-    }
-];
 
 class SlickNews extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            news: AppStore.getState().news,
+            secondNews: AppStore.getState().secondNews
+        }
+    }
+    onChangeState(){
+        this.setState({
+            news: AppStore.getState().news,
+            secondNews: AppStore.getState().secondNews
+        });
+
+    }
+    componentDidMount() {
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
     render() {
         var settings = {
             dots: true,
@@ -87,19 +59,24 @@ class SlickNews extends Component {
             autoplay: true,
             focusOnSelect: true
         };
-        var componentNewsNode = news.map((prop, id) => {
+        var componentNewsNode = this.state.news.map((prop, id) => {
             return(
             <div>
-                <SlickNewsItem prop={prop} key={id}/>
+                <SlickNewsItem id={id} prop={prop} key={id}/>
             </div>
             );
         })
+        var componentSlick = null;
+        if (this.state.news.length > 0) {
+            componentSlick = <Slider {...settings}>
+
+                {componentNewsNode}
+            </Slider>
+        }
         return (
             <div className="list_carousel responsive">
-                <Slider {...settings}>
-
-                    {componentNewsNode}
-                </Slider>
+                {componentSlick}
+                <Link to={`/news`} className="btn btn-secondary mySecondary" >Новости</Link>
 
             </div>
         );

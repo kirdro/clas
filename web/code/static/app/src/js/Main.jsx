@@ -16,6 +16,7 @@ import Events from './component/events'
 import GalleryBox from './component/gallery'
 import Actions from './actions/actions';
 import AppStore from './store/store';
+import NewsBox from './component/newsBox';
 
 
 
@@ -39,7 +40,7 @@ class Main extends Component {
 
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if (nextState !== this.state) {
+        if (nextState !== this.state || this.props.location.pathname !== nextProps.location.pathname) {
             return true
         }
         else {
@@ -209,6 +210,34 @@ class Main extends Component {
                                 <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Проекты</span>
                             </div>
                             <GalleryBox mode={'projects'}/>
+                            <div id="footerInnerSeparator"></div>
+                        </div>
+                    </div>
+                    <div id="footerOuterSeparator"></div>
+                    <Footer/>
+                </div>
+            );
+        }
+        else if (this.props.location.pathname === '/news') {
+            window.scrollTo(0, 0)
+            return (
+                <div>
+                    <div className="calendarButton">
+                        <Link to={'/events'}>
+                            <i className="fa fa-calendar fa-3x" ariaHidden="true" />
+                            <br/>
+                            <span>Календарь событий</span>
+                        </Link>
+                    </div>
+                    <Header path="/news"/>
+                    <div id="contentOuterSeparator"></div>
+                    <div className="container">
+
+                        <div className="divPanel page-content">
+                            <div className="breadcrumbs">
+                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Новости</span>
+                            </div>
+                            <NewsBox/>
                             <div id="footerInnerSeparator"></div>
                         </div>
                     </div>

@@ -27,3 +27,8 @@
     display: block;
     height: 340px;
 }
+.mySecondary {
+    text-align: center;
+    display: inherit;
+    margin-top: 33px;
+}
