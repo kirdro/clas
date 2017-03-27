@@ -38,6 +38,14 @@ class Main extends Component {
         });
 
     }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextState !== this.state) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     componentDidMount() {
         AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
     }
@@ -45,7 +53,13 @@ class Main extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
-        // console.log('render', this.state.about);
+        // console.log('render', this.state.about[0]);
+        var subtitles = '',
+        descriptionHome = '';
+        if (this.state.about[0] !==  undefined) {
+            subtitles = this.state.about[0].subtitle;
+            descriptionHome = this.state.about[0].home_description;
+        }
         if (this.props.location.pathname === '/') {
             window.scrollTo(0, 0)
             return (
@@ -66,23 +80,22 @@ class Main extends Component {
                         <div className="divPanel page-content">
                             <div className="row-fluid">
                                 <div className="span12" id="divMain">
-                                    <h1>Welcome</h1>
-                                    <p>Content on this page is for presentation purposes only. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                        Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    <h1>{subtitles}</h1>
+                                    <p>
+                                        {descriptionHome}
                                     </p>
                                     <hr style={{margin: '45px 0 35px'}} />
                                     <div className="lead">
-                                        <h2>Lorem ipsum dolor sit amet.</h2>
-                                        <h3>Vivamus leo ante, consectetur sit amet vulputate vel, dapibus sit amet lectus.</h3>
+                                        <h2>Новости</h2>
+                                        {/*<h3>Vivamus leo ante, consectetur sit amet vulputate vel, dapibus sit amet lectus.</h3>*/}
                                     </div>
                                     <br />
                                     <SlickNews/>
                                     <hr style={{margin: '45px 0 35px'}} />
 
                                     <div className="lead">
-                                        <h2>Featured Content.</h2>
-                                        <h3>Content on this page is for presentation purposes only.</h3>
+                                        <h2>Будущий проект</h2>
+                                        {/*<h3>Content on this page is for presentation purposes only.</h3>*/}
                                     </div>
                                     <br />
                                     <div className="row-fluid">
@@ -193,7 +206,7 @@ class Main extends Component {
 
                         <div className="divPanel page-content">
                             <div className="breadcrumbs">
-                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Галерея</span>
+                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Проекты</span>
                             </div>
                             <GalleryBox mode={'projects'}/>
                             <div id="footerInnerSeparator"></div>

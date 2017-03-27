@@ -17,6 +17,14 @@ class Footer extends Component {
         });
 
     }
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if (nextState.about !== this.state.about) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     componentDidMount() {
         AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
     }
@@ -71,7 +79,7 @@ class Footer extends Component {
                                             <i className="general foundicon-phone icon" />
                                             <span className="field">Phone:</span>
                                             <br />
-                                            (123) 456 7890 / 456 7891
+
                                         </li>
                                         <li>
                                             <i className="general foundicon-mail icon" />
@@ -155,13 +163,13 @@ class Footer extends Component {
                                             <i className="general foundicon-phone icon" />
                                             <span className="field">Phone:</span>
                                             <br />
-                                            (123) 456 7890 / 456 7891
+                                            {this.state.about[0].phone}
                                         </li>
                                         <li>
                                             <i className="general foundicon-mail icon" />
                                             <span className="field">Email:</span>
                                             <br />
-                                            <a href="mailto:info@yourdomain.com" title="Email">info@yourdomain.com</a>
+                                            <a href={`mailto:${this.state.about[0].email}`} title="Email">{this.state.about[0].email}</a>
                                         </li>
                                         <li>
                                             <i className="general foundicon-home icon" style={{marginBottom: 50}} />
