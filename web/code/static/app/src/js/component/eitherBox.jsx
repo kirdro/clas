@@ -36,9 +36,11 @@ class EitherBox extends Component {
 
     render() {
         console.log('render', this.state.about);
-        var urlImage = 'https://pp.userapi.com/c419619/v419619515/5/EgumwQ36C1o.jpg';
+        var urlImage = 'https://pp.userapi.com/c419619/v419619515/5/EgumwQ36C1o.jpg',
+        title = '';
         if (this.state.about[0] !== undefined) {
             urlImage = this.state.about[0].media[0].url;
+            title = this.state.about[0].home_title;
         }
         return (
             <div id="decorative1" style={{position: 'relative', backgroundImage: `url(${urlImage})`}}>
@@ -48,7 +50,7 @@ class EitherBox extends Component {
                             <div className="span12">
                                 <div id="headerSeparator" />
                                 <div id="divHeaderText" className="page-content">
-                                    <div id="divHeaderLine1">Клуб Любителей Активного Спорта!</div><br />
+                                    <div id="divHeaderLine1">{title}</div><br />
                                     {/*<div id="divHeaderLine2">2nd line header text for calling extra attention to featured content..</div><br />*/}
                                     {/*<div id="divHeaderLine3"><a className="btn btn-large btn-primary" href="#">More Info</a></div>*/}
                                 </div>

@@ -3,8 +3,8 @@ import json
 
 
 def ApiResponse(value, status=200):
-    strResult = json.dumps(value, indent=4, ensure_ascii=False)
-    return HttpResponse(strResult, content_type="application/json; charset=utf-8'", status=status)
+    strResult = json.dumps(value, indent=4)
+    return HttpResponse(strResult, content_type="application/json; charset=utf-8", status=status)
 
 def GetParams(request, method, params_names, optional_params_names=[]):
     if request.method!=method:
