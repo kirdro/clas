@@ -239,13 +239,25 @@ gulp.task('watch', function() {
         remember.forget('styles2', path.resolve(filepath));
         delete cached.caches.styles2[path.resolve(filepath)];
     });
+    gulp.watch('src/css/**/*.*', gulp.series('styles')).on('unlink', function(filepath) {
+        remember.forget('styles', path.resolve(filepath));
+        delete cached.caches.styles[path.resolve(filepath)];
+    });
     gulp.watch('src/img/**/*.*', gulp.series('copyImg2')).on('unlink', function(filepath) {
         remember.forget('copyImg2', path.resolve(filepath));
         delete cached.caches.copyImg2[path.resolve(filepath)];
     });
+    gulp.watch('src/img/**/*.*', gulp.series('copyImg')).on('unlink', function(filepath) {
+        remember.forget('copyImg', path.resolve(filepath));
+        delete cached.caches.copyImg[path.resolve(filepath)];
+    });
     gulp.watch('src/js/**/*.*', gulp.series('browserify3')).on('unlink', function(filepath) {
         remember.forget('browserify3', path.resolve(filepath));
         delete cached.caches.browserify3[path.resolve(filepath)];
+    });
+    gulp.watch('src/js/**/*.*', gulp.series('browserify2')).on('unlink', function(filepath) {
+        remember.forget('browserify2', path.resolve(filepath));
+        delete cached.caches.browserify2[path.resolve(filepath)];
     });
     gulp.watch('src/js/**/*.*', gulp.series('rev2')).on('unlink', function(filepath) {
         remember.forget('rev2', path.resolve(filepath));
@@ -258,6 +270,10 @@ gulp.task('watch', function() {
     gulp.watch('src/scripts/**/*.*', gulp.series('copyLib2')).on('unlink', function(filepath) {
         remember.forget('copyLib2', path.resolve(filepath));
         delete cached.caches.copyLib2[path.resolve(filepath)];
+    });
+    gulp.watch('src/scripts/**/*.*', gulp.series('copyLib')).on('unlink', function(filepath) {
+        remember.forget('copyLib', path.resolve(filepath));
+        delete cached.caches.copyLib[path.resolve(filepath)];
     });
 })
 

@@ -14,12 +14,38 @@ import About from './component/about';
 import Form from './component/form';
 import Events from './component/events'
 import GalleryBox from './component/gallery'
+import Actions from './actions/actions';
+import AppStore from './store/store';
 
 
 
 class Main extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            about: AppStore.getState().about,
+            data: AppStore.getState()
+        }
+    }
+    componentWillMount() {
+        // console.log('componentWillMount');
+        Actions.getData();
+    }
+    onChangeState(){
+        this.setState({
+            about: AppStore.getState().about,
+            data: AppStore.getState()
+        });
+
+    }
+    componentDidMount() {
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
     render() {
-        // console.log('mainmian', this.props.location);
+        // console.log('render', this.state.about);
         if (this.props.location.pathname === '/') {
             window.scrollTo(0, 0)
             return (

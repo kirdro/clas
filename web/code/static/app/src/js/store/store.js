@@ -3,34 +3,21 @@
  */
 // var AppDispatcher = require('../dispatcher/dispatcher.js');
 // var AppConstants = require('../constants/constants.js');
-// var EventEmitter = require('events').EventEmitter;
+var EventEmitter = require('events').EventEmitter;
 // var assign = require('object-assign');
 
 
 var state = {
-    about: {
-    },
-    works: [],
-    newWorks: [],
+    about: [],
+    projects: [],
     news: [],
-    newsTop: [],
-    reviews: [],
-    reviewsTop: [],
-    statusShowModal: false,
-    dataModal: {
-        status: '',
-        data: {}
-    },
-    statusLoadCalc: 'false',
-    route: '/',
-    video: [],
-    videoTop: [],
-    routerParamsId: 0,
-    dataParamItems: {}
-}
+    events: [],
+    gallery:[],
+    partner:[]
+};
 
 
-var AppStore = assign({}, EventEmitter.prototype, {
+var AppStore = Object.assign({}, EventEmitter.prototype, {
     moduleChangeStoreListeners: [],
     addChangeStoreModuleListener: function(callback) {
         if (this.moduleChangeStoreListeners.indexOf(callback) == -1) {
@@ -47,8 +34,29 @@ var AppStore = assign({}, EventEmitter.prototype, {
             this.moduleChangeStoreListeners[i](state);
         }
     },
+    update: function (status, data) {
+        if (status === 'about') {
+            state.about = data;
+        }
+        else if (status === 'projects') {
+            state.projects = data;
+        }
+        else if (status === 'news') {
+            state.news = data;
+        }
+        else if (status === 'events') {
+            state.events = data;
+        }
+        else if (status === 'gallery') {
+            state.gallery = data;
+        }
+        else if (status === 'partner') {
+            state.partner = data;
+        }
+        this.emitChangeToModuleListeners();
+    },
     getState: function() {
         return state;
     }
 });
-exports default AppStore;
+export default AppStore;
