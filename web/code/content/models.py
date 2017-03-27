@@ -125,7 +125,7 @@ class EventMediaItem(MediaItem):
 class GaleryItem(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     autor = models.CharField(max_length=200, blank=True, default='', verbose_name='Автор')
-    dt = models.DateTimeField(default=timezone.now, verbose_name='Дата новости')
+    dt = models.DateTimeField(default=timezone.now, verbose_name='Дата элемента галереи')
     description = models.TextField(default='', blank=True, verbose_name='Описание')
     class Meta:
         verbose_name = 'Элемент галереи'
