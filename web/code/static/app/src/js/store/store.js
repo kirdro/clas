@@ -13,7 +13,9 @@ var state = {
     news: [],
     events: [],
     gallery:[],
-    partner:[]
+    partner:[],
+    favoriteProject: null,
+    futureProject: null
 };
 
 
@@ -39,6 +41,16 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             state.about = data;
         }
         else if (status === 'projects') {
+            // console.log('store', data);
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].project_type === 'favorite') {
+                    state.favoriteProject = data[i];
+                    console.log('store', data[i]);
+                }
+                else if (data[i].project_type === 'future') {
+                    state.futureProject = data[i];
+                }
+            }
             state.projects = data;
         }
         else if (status === 'news') {

@@ -35,7 +35,7 @@ class EitherBox extends Component {
     }
 
     render() {
-        console.log('render', this.state.about);
+        // console.log('render', this.state.about);
         var urlImage = 'https://pp.userapi.com/c419619/v419619515/5/EgumwQ36C1o.jpg',
         title = '';
         if (this.state.about[0] !== undefined) {
