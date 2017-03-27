@@ -36,7 +36,7 @@ def extract_media(media_items):
                 'youtube_id': extract_youtube_id(m.video_url),
                 'is_favorite': m.is_favorite
             })
-        return res
+    return res
 
 def extract_files(file_items):
     res = []
