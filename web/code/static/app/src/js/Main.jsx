@@ -9,7 +9,12 @@ import FlagShip from './component/flagShip';
 import SlickNews from './component/slickNews';
 import TopProject from './component/topProject';
 import Footer from './component/footer';
-import { BrowserRouter, Router, Route, Switch, Link } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch
+} from 'react-router-dom'
 import About from './component/about';
 import Form from './component/form';
 import Events from './component/events'
@@ -17,6 +22,7 @@ import GalleryBox from './component/gallery'
 import Actions from './actions/actions';
 import AppStore from './store/store';
 import NewsBox from './component/newsBox';
+import GalleryItemDetail from './component/GalleryItemDetail';
 
 
 
@@ -25,17 +31,23 @@ class Main extends Component {
         super(props);
         this.state = {
             about: AppStore.getState().about,
-            data: AppStore.getState()
+            data: AppStore.getState(),
+            indexGallery: AppStore.getState().indexGallery
         }
     }
     componentWillMount() {
         // console.log('componentWillMount');
         Actions.getData();
+        if (this.props.location.pathname.substr(0, 10) === `/projects/`) {
+            // console.log('componentWillMount', this.props.location.pathname.substring(10, this.props.location.pathname.length));
+            Actions.getIdGallery(+this.props.location.pathname.substring(10, this.props.location.pathname.length), 'project');
+        }
     }
     onChangeState(){
         this.setState({
             about: AppStore.getState().about,
-            data: AppStore.getState()
+            data: AppStore.getState(),
+            indexGallery: AppStore.getState().indexGallery
         });
 
     }
@@ -54,7 +66,7 @@ class Main extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
-        // console.log('render', this.state.about[0]);
+        // console.log('render', this);
         var subtitles = '',
         descriptionHome = '';
         if (this.state.about[0] !==  undefined) {
@@ -246,6 +258,34 @@ class Main extends Component {
                 </div>
             );
         }
+        else if (this.props.location.pathname.substr(0, 10) === `/projects/`) {
+            window.scrollTo(0, 0)
+            return (
+                <div>
+                    <div className="calendarButton">
+                        <Link to={'/events'}>
+                            <i className="fa fa-calendar fa-3x" ariaHidden="true" />
+                            <br/>
+                            <span>Календарь событий</span>
+                        </Link>
+                    </div>
+                    <Header path="/news"/>
+                    <div id="contentOuterSeparator"></div>
+                    <div className="container">
+
+                        <div className="divPanel page-content">
+                            <div className="breadcrumbs">
+                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Проект</span>
+                            </div>
+                            <GalleryItemDetail/>
+                            <div id="footerInnerSeparator"></div>
+                        </div>
+                    </div>
+                    <div id="footerOuterSeparator"></div>
+                    <Footer/>
+                </div>
+            );
+        }
     }
 }
 
@@ -255,18 +295,34 @@ Main.contextTypes = {
     router: PropTypes.object.isRequired
 }
 
-ReactDOM.render(<BrowserRouter>
-    <Switch>
+
+class Main2 extends Component {
+    render() {
+        console.log('!!!!@@#!@#!')
+        return (
+            <Main router="/projects/:propjectId"/>
+        );
+    }
+}
+
+
+
+
+ReactDOM.render(<Router >
     <Route path="/" component={Main}>
-        <Route path="/about" component={Main}/>
-        <Route path="/news" component={Main}>
-            <Route path="/news/:newsId" component={Main}/>
-        </Route>
-        <Route path="/projects" component={Main}/>
-        <Route path="/gallery" component={Main}>
-            <Route path="/works/:workId" component={Main}/>
-        </Route>
-        <Route path="/events"/>
+        <Switch>
+            <Main>
+                <Route path="/about" component={Main}/>
+                <Route path="/news" component={Main}/>
+                <Route path="/projects" component={Main}>
+                    {/*<Route path="/projects/:propjectId" component={Main2}/>*/}
+                </Route>
+                <Route path="/projects/:projectId" component={Main2}/>
+                <Route path="/gallery" component={Main}>
+                    <Route path="/works/:workId" component={Main}/>
+                </Route>
+                <Route path="/events"/>
+            </Main>
+        </Switch>
     </Route>
-    </Switch>
-</BrowserRouter>, document.getElementById('reactComponent'));
+</Router>, document.getElementById('reactComponent'));

@@ -35,6 +35,9 @@ var Actions = {
     },
     onClickNews: function (index) {
         AppStore.onClickNews(index);
+    },
+    getIdGallery: function (index, status) {
+        AppStore.getIdGallery(index, status);
     }
 };
 export default Actions;

@@ -3,7 +3,8 @@ import React, {
     PropTypes,
 } from 'react';
 import AppStore from '../store/store';
-
+import {Router, Route, Link} from 'react-router-dom';
+import Actions from '../actions/actions';
 
 class FlagShip extends Component {
     constructor(props){
@@ -11,11 +12,19 @@ class FlagShip extends Component {
         this.state = {
             favoriteProject: AppStore.getState().favoriteProject
         }
+        this.internalStatet = {
+            isMounted: false
+        }
+    }
+    getId(){
+        Actions.getIdGallery(this.state.favoriteProject.index, 'project');
     }
     onChangeState(){
-        this.setState({
-            favoriteProject: AppStore.getState().favoriteProject
-        });
+        if (this.internalStatet.isMounted === true) {
+            this.setState({
+                favoriteProject: AppStore.getState().favoriteProject
+            });
+        }
 
     }
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -27,16 +36,19 @@ class FlagShip extends Component {
         }
     }
     componentDidMount() {
+        this.internalStatet.isMounted = true;
         AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     componentWillUnmount() {
+        this.internalStatet.isMounted = false;
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
         // console.log('render', this.state.favoriteProject);
         var url = null,
         title = null,
-        desc = null;
+        desc = null,
+        index = 0;
         if (this.state.favoriteProject !== null) {
             for (var i = 0; i < this.state.favoriteProject.media.length; i++) {
                 if (this.state.favoriteProject.media[i].is_favorite === true) {
@@ -45,6 +57,7 @@ class FlagShip extends Component {
                     }
                 }
             }
+            index = this.state.favoriteProject.index;
             title = this.state.favoriteProject.title;
             desc = this.state.favoriteProject.description.substr(0, 68) + '...';
         }
@@ -58,7 +71,7 @@ class FlagShip extends Component {
                                 <div id="divHeaderText" className="page-content">
                                     <div id="divHeaderLine1" className="divHeaderLine1">{title}</div><br />
                                     <div id="divHeaderLine2">{desc}</div><br />
-                                    <div id="divHeaderLine3"><a className="btn btn-large btn-primary" href="#">Подробнее</a></div>
+                                    <div id="divHeaderLine3"><Link onClick={this.getId.bind(this)} to={`/projects/${index}`} className="btn btn-large btn-primary" >Подробнее</Link></div>
                                 </div>
                                 <div id="headerSeparator2" />
                             </div>

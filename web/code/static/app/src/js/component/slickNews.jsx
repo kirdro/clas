@@ -29,18 +29,25 @@ class SlickNews extends Component {
             news: AppStore.getState().news,
             secondNews: AppStore.getState().secondNews
         }
+        this.internalStatet = {
+            isMounted: false
+        }
     }
     onChangeState(){
-        this.setState({
-            news: AppStore.getState().news,
-            secondNews: AppStore.getState().secondNews
-        });
+        if (this.internalStatet.isMounted === true) {
+            this.setState({
+                news: AppStore.getState().news,
+                secondNews: AppStore.getState().secondNews
+            });
+        }
 
     }
     componentDidMount() {
+        this.internalStatet.isMounted = true;
         AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     componentWillUnmount() {
+        this.internalStatet.isMounted = false;
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {

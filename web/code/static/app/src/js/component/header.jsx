@@ -165,7 +165,7 @@ class Header extends Component {
                         <div className="row-fluid">
                             <div className="span12">
                                 <div id="divLogo" className="pull-left">
-                                    <a href="index.html" id="divSiteTitle"></a><br />
+                                    <Link to={`/`} id="divSiteTitle"></Link><br />
                                 </div>
                                 <div id="divMenuRight" className="pull-right">
                                     <div className="navbar">

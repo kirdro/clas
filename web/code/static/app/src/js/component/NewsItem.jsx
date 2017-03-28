@@ -22,7 +22,7 @@ class NewsItem extends Component {
                     return (<p key={id}>{prop.value}</p>)
                 }
                 else if (prop.item_type === 'image') {
-                    return (<img key={id} src={prop.url} alt=""/>);
+                    return (<img className="img-polaroid" style={{margin: '5px 0px 15px'}} key={id} src={prop.url} alt=""/>);
                 }
                 else if (prop.item_type === 'video') {
                     const opts = {

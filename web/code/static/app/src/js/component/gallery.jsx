@@ -4,124 +4,57 @@ import React, {
 } from 'react';
 
 import GalleryItem from './dalleryItem';
-
-var GalleryArray = [
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        date: '2017-01-01 04:04',
-        author:'губка боб',
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: [],
-        id: 0
-    },
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        date: '2017-03-25 04:04',
-        author:'губка боб',
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: ['CdGgqC3iqcE'],
-        id: 1
-    },
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        date: '2017-01-01 04:04',
-        author:'губка боб',
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: [],
-        id: 2
-    },
-    {
-        urlImg: [
-        ],
-        date: '2017-01-01 04:04',
-        author:'губка боб',
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: null,
-        videosId: ['CdGgqC3iqcE'],
-        id: 3
-    },
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        date: '2017-01-01 04:04',
-        author:'губка боб',
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: ['CdGgqC3iqcE'],
-        id: 4
-    }
-];
-
-var projectsArray = [
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: ['CdGgqC3iqcE'],
-        id: 4,
-        file: [],
-        favouriteProjects: true,
-        futureProject: true
-    },
-    {
-        urlImg: [
-            'https://avatanplus.com/files/resources/original/5862f4d2264f5159428c54ed.jpg',
-            'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg'
-        ],
-        title: 'Hello',
-        disc: 'A sample photo with short description. Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        favouriteImg: 'https://avatanplus.com/files/resources/original/572f20ad98ebf1549017a63a.jpg',
-        videosId: ['CdGgqC3iqcE'],
-        id: 4,
-        file: [],
-        favouriteProjects: true,
-        futureProject: true
-    }
-]
+import AppStore from '../store/store';
 
 class GalleryBox extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            projects: AppStore.getState().projects,
+            gallery: AppStore.getState().gallery
+        }
+        this.internalStatet = {
+            isMounted: false
+        }
+    }
+    onChangeState(){
+        if (this.internalStatet.isMounted === true) {
+            this.setState({
+                projects: AppStore.getState().projects,
+                gallery: AppStore.getState().gallery
+            });
+        }
 
+    }
+    componentDidMount() {
+        this.internalStatet.isMounted = true;
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        this.internalStatet.isMounted = false;
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
 
     render() {
         var componentList;
-        // console.log('!!!!!', this.props.mode);
+        var title;
+        // console.log('!!!!!', this.state.projects);
         if (this.props.mode === 'gallery') {
-            componentList = GalleryArray.map((prop, id) => {
-                return (<GalleryItem mode="gallery" prop={prop} key={id} />)
+            title = 'Галерея';
+            componentList = this.state.gallery.map((prop, id) => {
+                return (<GalleryItem id={id} mode="gallery" prop={prop} key={id} />)
             })
         }
         else if (this.props.mode === 'projects') {
-            componentList = GalleryArray.map((prop, id) => {
-                return (<GalleryItem mode="projects" prop={prop} key={id} />)
+            title = 'Проекты';
+            componentList = this.state.projects.map((prop, id) => {
+                return (<GalleryItem id={id} mode="projects" prop={prop} key={id} />)
             })
         }
         return (
             <div className="row-fluid">
                 <div className="span12">
-                    <h1>Галлерея</h1>
+                    <h1>{title}</h1>
                     <div id="gridArea">
                         <ul id="tiles">
                             {componentList}

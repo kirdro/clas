@@ -16,7 +16,10 @@ var state = {
     partner:[],
     favoriteProject: null,
     futureProject: null,
-    secondNews: null
+    secondNews: null,
+    projectsItem: null,
+    indexGallery: 0,
+    statusGellary: ''
 };
 
 
@@ -46,13 +49,19 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             for (var i = 0; i < data.length; i++) {
                 if (data[i].project_type === 'favorite') {
                     state.favoriteProject = data[i];
+                    state.favoriteProject['index'] = i;
                     // console.log('store', data[i]);
                 }
                 else if (data[i].project_type === 'future') {
                     state.futureProject = data[i];
+                    state.futureProject['index'] = i;
                 }
             }
             state.projects = data;
+            if (state.statusGellary === 'project') {
+                console.log('!!!!!', state.indexGallery);
+                state.projectsItem = state.projects[state.indexGallery];
+            }
         }
         else if (status === 'news') {
             state.secondNews = data[data.length - 1];
@@ -64,6 +73,9 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
         }
         else if (status === 'gallery') {
             state.gallery = data;
+            if (state.statusGellary === 'gallery') {
+                state.projectsItem = state.gallery[state.indexGallery];
+            }
         }
         else if (status === 'partner') {
             state.partner = data;
@@ -72,6 +84,17 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
     },
     onClickNews: function (index) {
         state.secondNews = state.news[index];
+        this.emitChangeToModuleListeners();
+    },
+    getIdGallery: function (index, status) {
+        if (status === 'project') {
+            state.projectsItem = state.projects[index];
+        }
+        else {
+            state.projectsItem = state.gallery[index];
+        }
+        state.statusGellary = status;
+        state.indexGallery = index;
         this.emitChangeToModuleListeners();
     },
     getState: function() {

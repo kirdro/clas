@@ -10,17 +10,24 @@ class EitherBox extends Component {
         this.state = {
             about: AppStore.getState().about
         }
+        this.internalStatet = {
+            isMounted: false
+        }
     }
     onChangeState(){
-        this.setState({
-            about: AppStore.getState().about
-        });
+        if (this.internalStatet.isMounted === true) {
+            this.setState({
+                about: AppStore.getState().about
+            });
+        }
 
     }
     componentDidMount() {
+        this.internalStatet.isMounted = true;
         AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     componentWillUnmount() {
+        this.internalStatet.isMounted = false;
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
 
