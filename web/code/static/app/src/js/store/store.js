@@ -74,7 +74,6 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             for (var i = 0; i < data.length; i++) {
                 var obj = {
                     title: data[i].title,
-                    allDay: true,
                     start: new Date(data[i].dt_start),
                     end: new Date(data[i].dt_end),
                     description: data[i].description,
@@ -83,6 +82,7 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
                 }
                 state.events.push(obj);
             }
+            console.log('store', state.events);
             // {
             //     'title': 'All Day Event',
             //     'allDay': true,

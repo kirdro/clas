@@ -70,7 +70,7 @@ class Events extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     onSelectEvent(e, event){
-        console.log('events', e)
+        // console.log('events', e)
         this.setState({
             showModal: true,
             dataPlan: e
@@ -83,7 +83,7 @@ class Events extends Component {
         });
     }
     render() {
-        // console.log('render', this.state.dataPlan);
+        console.log('render', this.state.events);
         var autor = null,
             description = null,
             title = null,
