@@ -25,9 +25,16 @@ class GalleryItem extends Component {
 
             }
         };
-        console.log('gallery', this.props.prop.dt);
+        // console.log('gallery', this.props.prop.dt);
         var componentContent;
-        var media = this.props.prop.media;
+        var media = this.props.prop.media,
+        urlLink = null;
+        if (this.props.mode === 'gallery') {
+            urlLink = `/gallery/${this.props.id}`;
+        }
+        else if (this.props.mode === 'projects') {
+            urlLink = `/projects/${this.props.id}`;
+        }
         for (var i = 0; i < media.length; i++) {
             if (media[i].is_favorite === true) {
                 if (media[i].item_type === 'video') {
@@ -47,7 +54,7 @@ class GalleryItem extends Component {
 
                 {componentContent}
                 <div className="meta"><span>{this.props.mode === 'gallery' ? moment(this.props.prop.dt).fromNow() : null}</span><span className="pull-right">{this.props.prop.autor}</span></div>
-                <h4 onClick={this.getId.bind(this)}><Link to={`/projects/${this.props.id}`}>{this.props.prop.title}</Link></h4>
+                <h4 onClick={this.getId.bind(this)}><Link to={urlLink}>{this.props.prop.title}</Link></h4>
                 <p>
                     {this.props.prop.description.substr(0, 166) + '...'}
                 </p>

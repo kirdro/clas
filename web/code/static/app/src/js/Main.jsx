@@ -42,6 +42,10 @@ class Main extends Component {
             // console.log('componentWillMount', this.props.location.pathname.substring(10, this.props.location.pathname.length));
             Actions.getIdGallery(+this.props.location.pathname.substring(10, this.props.location.pathname.length), 'project');
         }
+        else if (this.props.location.pathname.substr(0, 9) === `/gallery/`) {
+            // console.log('componentWillMount', this.props.location.pathname.substring(10, this.props.location.pathname.length));
+            Actions.getIdGallery(+this.props.location.pathname.substring(9, this.props.location.pathname.length), 'gallery');
+        }
     }
     onChangeState(){
         this.setState({
@@ -269,13 +273,41 @@ class Main extends Component {
                             <span>Календарь событий</span>
                         </Link>
                     </div>
-                    <Header path="/news"/>
+                    <Header path="/projects"/>
                     <div id="contentOuterSeparator"></div>
                     <div className="container">
 
                         <div className="divPanel page-content">
                             <div className="breadcrumbs">
-                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <span>Проект</span>
+                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <Link to={'/projects'}>Проекты</Link> &nbsp;/&nbsp; <span>Проект</span>
+                            </div>
+                            <GalleryItemDetail/>
+                            <div id="footerInnerSeparator"></div>
+                        </div>
+                    </div>
+                    <div id="footerOuterSeparator"></div>
+                    <Footer/>
+                </div>
+            );
+        }
+        else if (this.props.location.pathname.substr(0, 9) === `/gallery/`) {
+            window.scrollTo(0, 0)
+            return (
+                <div>
+                    <div className="calendarButton">
+                        <Link to={'/events'}>
+                            <i className="fa fa-calendar fa-3x" ariaHidden="true" />
+                            <br/>
+                            <span>Календарь событий</span>
+                        </Link>
+                    </div>
+                    <Header path="/gallery"/>
+                    <div id="contentOuterSeparator"></div>
+                    <div className="container">
+
+                        <div className="divPanel page-content">
+                            <div className="breadcrumbs">
+                                <Link to={'/'}>Главная</Link> &nbsp;/&nbsp; <Link to={'/gallery'}>Галерея</Link> &nbsp;/&nbsp; <span>Компонент</span>
                             </div>
                             <GalleryItemDetail/>
                             <div id="footerInnerSeparator"></div>
@@ -319,7 +351,7 @@ ReactDOM.render(<Router >
                 </Route>
                 <Route path="/projects/:projectId" component={Main2}/>
                 <Route path="/gallery" component={Main}>
-                    <Route path="/works/:workId" component={Main}/>
+                    <Route path="/gallery/:workId" component={Main}/>
                 </Route>
                 <Route path="/events"/>
             </Main>

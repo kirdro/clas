@@ -46,7 +46,11 @@ class EitherBox extends Component {
         var urlImage = 'https://pp.userapi.com/c419619/v419619515/5/EgumwQ36C1o.jpg',
         title = '';
         if (this.state.about[0] !== undefined) {
-            urlImage = this.state.about[0].media[0].url;
+            for (var i = 0; i < this.state.about[0].media.length; i++) {
+                if (this.state.about[0].media[i].item_type === 'image') {
+                    urlImage = this.state.about[0].media[i].url;
+                }
+            }
             title = this.state.about[0].home_title;
         }
         return (

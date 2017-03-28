@@ -6,7 +6,7 @@ import {Router, Route, Link} from 'react-router-dom';
 
 class Header extends Component {
     render() {
-        console.log('render');
+        // console.log('render');
         var componentNav = null;
         if (this.props.path === '/') {
             componentNav = <ul className="nav nav-pills ddmenu">
