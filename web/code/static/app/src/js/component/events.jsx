@@ -4,6 +4,9 @@ import React, {
 } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import AppStore from '../store/store';
+import ReactModal from 'react-modal';
+import YouTube from 'react-youtube';
 require('moment/locale/ru');
 moment.locale('ru');
 
@@ -16,81 +19,106 @@ class Events extends Component {
         super(props)
         this.state = {
             culture: 'ru',
-            events: [
-            {
-                'title': 'All Day Event',
-                'allDay': true,
-                'start': new Date(2015, 3, 0),
-                'end': new Date(2015, 3, 1)
-            },
-            {
-                'title': 'Long Event',
-                'start': new Date(2015, 3, 7),
-                'end': new Date(2015, 3, 10)
-            },
+            events: AppStore.getState().events,
+            showModal: false,
+            dataPlan: null,
+            style: {
+                overlay : {
+                    position          : 'fixed',
+                    top               : 0,
+                    left              : 0,
+                    right             : 0,
+                    bottom            : 0,
+                    backgroundColor   : 'rgba(0, 0, 0, 0.75)'
+                },
+                content : {
+                    position                   : 'absolute',
+                    top                        : '40px',
+                    left                       : '40px',
+                    right                      : '40px',
+                    bottom                     : '40px',
+                    border                     : '1px solid #ccc',
+                    background                 : '#fff',
+                    overflow                   : 'auto',
+                    WebkitOverflowScrolling    : 'touch',
+                    borderRadius               : '4px',
+                    outline                    : 'none',
+                    padding                    : '20px'
 
-            {
-                'title': 'DTS STARTS',
-                'start': new Date(2016, 2, 13, 0, 0, 0),
-                'end': new Date(2016, 2, 20, 0, 0, 0)
-            },
-
-            {
-                'title': 'DTS ENDS',
-                'start': new Date(2016, 10, 6, 0, 0, 0),
-                'end': new Date(2016, 10, 13, 0, 0, 0)
-            },
-
-            {
-                'title': 'Some Event',
-                'start': new Date(2015, 3, 9, 0, 0, 0),
-                'end': new Date(2015, 3, 9, 0, 0, 0)
-            },
-            {
-                'title': 'Conference',
-                'start': new Date(2015, 3, 11),
-                'end': new Date(2015, 3, 13),
-                desc: 'Big conference for important people'
-            },
-            {
-                'title': 'Meeting',
-                'start': new Date(2015, 3, 12, 10, 30, 0, 0),
-                'end': new Date(2015, 3, 12, 12, 30, 0, 0),
-                desc: 'Pre-meeting meeting, to prepare for the meeting'
-            },
-            {
-                'title': 'Lunch',
-                'start':new Date(2015, 3, 12, 12, 0, 0, 0),
-                'end': new Date(2015, 3, 12, 13, 0, 0, 0),
-                desc: 'Power lunch'
-            },
-            {
-                'title': 'Meeting',
-                'start':new Date(2015, 3, 12,14, 0, 0, 0),
-                'end': new Date(2015, 3, 12,15, 0, 0, 0)
-            },
-            {
-                'title': 'Happy Hour',
-                'start':new Date(2015, 3, 12, 17, 0, 0, 0),
-                'end': new Date(2015, 3, 12, 17, 30, 0, 0),
-                desc: 'Most important meal of the day'
-            },
-            {
-                'title': 'Dinner',
-                'start':new Date(2015, 3, 12, 20, 0, 0, 0),
-                'end': new Date(2015, 3, 12, 21, 0, 0, 0)
-            },
-            {
-                'title': 'Birthday Party',
-                'start':new Date(2015, 3, 13, 7, 0, 0),
-                'end': new Date(2015, 3, 13, 10, 30, 0)
+                }
             }
-        ]}
+        }
+        this.internalStatet = {
+            isMounted: true
+        }
+    }
+    onChangeState(){
+        if (this.internalStatet.isMounted === true) {
+            this.setState({
+                projectsItem: AppStore.getState().projectsItem,
+                events: AppStore.getState().events
+            });
+        }
+
+    }
+    componentDidMount() {
+        this.internalStatet.isMounted = true;
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        this.internalStatet.isMounted = false;
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     onSelectEvent(e, event){
-        console.log('events', e, this.state)
+        console.log('events', e)
+        this.setState({
+            showModal: true,
+            dataPlan: e
+        });
+
+    }
+    close(){
+        this.setState({
+            showModal: false
+        });
     }
     render() {
+        // console.log('render', this.state.dataPlan);
+        var autor = null,
+            description = null,
+            title = null,
+            media = [],
+        componentNode = null;
+        if (this.state.dataPlan !== null) {
+            autor = this.state.dataPlan.autor;
+            description = this.state.dataPlan.description;
+            title = this.state.dataPlan.title;
+            media = this.state.dataPlan.media;
+            componentNode = media.map((prop, id) => {
+                if (prop.item_type === 'description') {
+                    return (<p key={id}>{prop.value}</p>)
+                }
+                else if (prop.item_type === 'image') {
+                    return (<img className="img-polaroid" style={{margin: '5px 0px 15px'}} key={id} src={prop.url} alt=""/>);
+                }
+                else if (prop.item_type === 'subtitle') {
+                    return (<h3>{prop.value}</h3>);
+                }
+                else if (prop.item_type === 'video') {
+                    // console.log('galleryDetail', prop.youtube_id);
+                    const opts = {
+                        height: '200',
+                        width: '240',
+                        playerVars: { // https://developers.google.com/youtube/player_parameters
+                        }
+                    };
+                    return (<YouTube
+                        key={id}
+                        opts={opts}
+                        videoId={prop.youtube_id} />);
+                }
+            })
+        }
         return (
             <div>
                 <div className="row-fluid">
@@ -100,11 +128,25 @@ class Events extends Component {
                             onSelectEvent={this.onSelectEvent.bind(this)}
                             events={this.state.events}
                             culture={this.state.culture}
-                            defaultDate={new Date(2015, 3, 1)}
+                            defaultDate={new Date()}
                             popup={true}
                         />
                     </div>
                 </div>
+                <ReactModal
+                    isOpen={this.state.showModal}
+                    contentLabel="Inline Styles Modal Example"
+                    onRequestClose={this.close.bind(this)}
+                    className="Modal"
+                    style={this.state.style}
+                    overlayClassName="Overlay"
+                >
+                    <h1>{title}</h1>
+                    <span className="dateTimeNews">{autor}</span>
+                    <p>{description}</p>
+                    {componentNode}
+                    <button className="btn btn-primary" onClick={this.close.bind(this)}>Закрыть</button>
+                </ReactModal>
             </div>
         );
     }

@@ -34,7 +34,7 @@ class GalleryItemDetail extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
-        console.log('galleryDetail', this.state.projectsItem);
+        // console.log('galleryDetail', this.state.projectsItem);
         var componentNode = null;
         var title = null;
         var desc = null;
@@ -53,7 +53,7 @@ class GalleryItemDetail extends Component {
                     return (<h3>{prop.value}</h3>);
                 }
                 else if (prop.item_type === 'video') {
-                    console.log('galleryDetail', prop.youtube_id);
+                    // console.log('galleryDetail', prop.youtube_id);
                     const opts = {
                         height: '200',
                         width: '240',

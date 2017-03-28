@@ -69,7 +69,31 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             state.news = data;
         }
         else if (status === 'events') {
-            state.events = data;
+            // console.log('store', data);
+            state.events = [];
+            for (var i = 0; i < data.length; i++) {
+                var obj = {
+                    title: data[i].title,
+                    allDay: true,
+                    start: new Date(data[i].dt_start),
+                    end: new Date(data[i].dt_end),
+                    description: data[i].description,
+                    autor: data[i].autor,
+                    media: data[i].media
+                }
+                state.events.push(obj);
+            }
+            // {
+            //     'title': 'All Day Event',
+            //     'allDay': true,
+            //     'start': new Date(2015, 3, 0),
+            //     'end': new Date(2015, 3, 1)
+            // },
+            // {
+            //     'title': 'Long Event',
+            //     'start': new Date(2015, 3, 7),
+            //     'end': new Date(2015, 3, 10)
+            // },
         }
         else if (status === 'gallery') {
             state.gallery = data;
