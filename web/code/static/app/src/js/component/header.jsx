@@ -14,23 +14,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown"><Link to={'/gallery'}>Галерея</Link></li>
 
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
@@ -39,23 +39,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/">Главная</Link></li>
                 <li className="dropdown active"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown"><Link to={'/gallery'}>Галерея</Link></li>
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
@@ -64,23 +64,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/">Главная</Link></li>
                 <li className="dropdown"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown"><Link to={'/gallery'}>Галерея</Link></li>
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
@@ -89,23 +89,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/">Главная</Link></li>
                 <li className="dropdown"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown active"><Link to={'/gallery'}>Галерея</Link></li>
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
@@ -114,23 +114,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/">Главная</Link></li>
                 <li className="dropdown"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown"><Link to={'/gallery'}>Галерея</Link></li>
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown active"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
@@ -139,23 +139,23 @@ class Header extends Component {
                 <li className="dropdown"><Link to="/">Главная</Link></li>
                 <li className="dropdown"><Link to="/about">О Клубе</Link></li>
                 <li className="dropdown"><Link to={'/gallery'}>Галерея</Link></li>
-                <li className="dropdown">
-                    <a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>
-                    <ul className="dropdown-menu">
-                        <li><a href="full.html">Full Page</a></li>
-                        <li><a href="2-column.html">Two Column</a></li>
-                        <li><a href="3-column.html">Three Column</a></li>
-                        <li><a href="../documentation/index.html">Documentation</a></li>
-                        <li className="dropdown">
-                            <a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>
-                            <ul className="dropdown-menu sub-menu">
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                                <li><a href="#">Dropdown Item</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                {/*<li className="dropdown">*/}
+                    {/*<a href="page.html" className="dropdown-toggle">Page <b className="caret" /></a>*/}
+                    {/*<ul className="dropdown-menu">*/}
+                        {/*<li><a href="full.html">Full Page</a></li>*/}
+                        {/*<li><a href="2-column.html">Two Column</a></li>*/}
+                        {/*<li><a href="3-column.html">Three Column</a></li>*/}
+                        {/*<li><a href="../documentation/index.html">Documentation</a></li>*/}
+                        {/*<li className="dropdown">*/}
+                            {/*<a href="#" className="dropdown-toggle">Dropdown Item &nbsp;»</a>*/}
+                            {/*<ul className="dropdown-menu sub-menu">*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                                {/*<li><a href="#">Dropdown Item</a></li>*/}
+                            {/*</ul>*/}
+                        {/*</li>*/}
+                    {/*</ul>*/}
+                {/*</li>*/}
                 <li className="dropdown"><Link to={'/projects'}>Проекты</Link></li>
             </ul>
         }
