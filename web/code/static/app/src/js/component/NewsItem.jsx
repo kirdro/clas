@@ -24,6 +24,9 @@ class NewsItem extends Component {
                 else if (prop.item_type === 'image') {
                     return (<img className="img-polaroid" style={{margin: '5px 0px 15px'}} key={id} src={prop.url} alt=""/>);
                 }
+                else if (prop.item_type === 'subtitle') {
+                    return (<h3>{prop.value}</h3>);
+                }
                 else if (prop.item_type === 'video') {
                     const opts = {
                         height: '200',

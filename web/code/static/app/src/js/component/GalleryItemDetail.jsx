@@ -34,10 +34,12 @@ class GalleryItemDetail extends Component {
         AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
     render() {
-        // console.log('galleryDetail', this.state.projectsItem);
+        console.log('galleryDetail', this.state.projectsItem);
         var componentNode = null;
         var title = null;
+        var desc = null;
         if (this.state.projectsItem !== undefined) {
+            desc = this.state.projectsItem.description;
             var media = this.state.projectsItem.media;
             title = this.state.projectsItem.title;
             componentNode = media.map((prop, id) => {
@@ -46,6 +48,9 @@ class GalleryItemDetail extends Component {
                 }
                 else if (prop.item_type === 'image') {
                     return (<img className="img-polaroid" style={{margin: '5px 0px 15px'}} key={id} src={prop.url} alt=""/>);
+                }
+                else if (prop.item_type === 'subtitle') {
+                    return (<h3>{prop.value}</h3>);
                 }
                 else if (prop.item_type === 'video') {
                     console.log('galleryDetail', prop.youtube_id);
@@ -68,6 +73,7 @@ class GalleryItemDetail extends Component {
                 <div className="span12" id="divMain">
                     <h1>{title}</h1>
                     <hr />
+                    <p>{desc}</p>
                     {componentNode}
                 </div>
                 {/*End Main Content Area*/}
