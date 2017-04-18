@@ -23,6 +23,7 @@ import Actions from './actions/actions';
 import AppStore from './store/store';
 import NewsBox from './component/newsBox';
 import GalleryItemDetail from './component/GalleryItemDetail';
+import HomeMaps from './component/HomeMaps';
 
 
 
@@ -118,6 +119,14 @@ class Main extends Component {
                                     <div className="row-fluid">
                                         <TopProject />
                                         {/*<Form />*/}
+                                    </div>
+                                    <div className="row-fluid">
+                                        {/*<div style={{*/}
+                                            {/*width: '100%',*/}
+                                            {/*height: '500px'*/}
+                                        {/*}}>*/}
+                                            {/*<HomeMaps/>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>

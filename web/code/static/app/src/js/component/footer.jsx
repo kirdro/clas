@@ -110,7 +110,7 @@ class Footer extends Component {
                                         Copyright © 2013 Your Company. All Rights Reserved.
                                     </p>
                                     <p className="social_bookmarks">
-                                        <a href="#"><i className="social foundicon-facebook" />&nbsp;Facebook</a>
+                                        <a href="https://vk.com/free.extreme" target="blank"><i className="fa fa-vk" ariaHidden="true"></i>&nbsp;Vk</a>
                                         <a href><i className="social foundicon-twitter" />&nbsp;Twitter</a>
                                         <a href="#"><i className="social foundicon-pinterest" />&nbsp;Pinterest</a>
                                         <a href="#"><i className="social foundicon-rss" />&nbsp;Rss</a>
@@ -194,7 +194,7 @@ class Footer extends Component {
                                         Copyright © 2013 Your Company. All Rights Reserved.
                                     </p>
                                     <p className="social_bookmarks">
-                                        <a href="#"><i className="social foundicon-facebook" />&nbsp;Facebook</a>
+                                        <a href="https://vk.com/free.extreme" target="blank"><i className="fa fa-vk" ariaHidden="true"></i>&nbsp;Vk</a>
                                         <a href><i className="social foundicon-twitter" />&nbsp;Twitter</a>
                                         <a href="#"><i className="social foundicon-pinterest" />&nbsp;Pinterest</a>
                                         <a href="#"><i className="social foundicon-rss" />&nbsp;Rss</a>
