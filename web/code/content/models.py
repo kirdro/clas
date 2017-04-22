@@ -45,6 +45,7 @@ class AboutCompany(models.Model):
     url_instagram = models.CharField(max_length=2000, blank=True, default=None, null=True, verbose_name='Ссылка Instagram')
     url_telegram = models.CharField(max_length=2000, blank=True, default=None, null=True, verbose_name='Ссылка Telegram')
     url_youtube = models.CharField(max_length=2000, blank=True, default=None, null=True, verbose_name='Ссылка Youtube')
+    coords = models.CharField(max_length=30, blank=True, default=None, null=True, verbose_name='Геграфические координаты')
     class Meta:
         verbose_name = 'Информация о компании'
         verbose_name_plural = 'Информация о компании'
@@ -66,6 +67,7 @@ class News(models.Model):
     autor = models.CharField(max_length=200, blank=True, default='', verbose_name='Автор')
     description = models.TextField(default='', blank=True, verbose_name='Описание')
     dt = models.DateTimeField(default=timezone.now, verbose_name='Дата новости')
+    coords = models.CharField(max_length=30, blank=True, default=None, null=True, verbose_name='Геграфические координаты')
     def __unicode__(self):
         return self.title
     class Meta:
@@ -86,6 +88,7 @@ class WorkItem(models.Model):
     description = models.TextField(default='', blank=True, verbose_name='Описание')
     sort_index = models.IntegerField(default=0, verbose_name='Сортировочный индекс')
     project_type = models.CharField(max_length=10, choices=WORK_ITEM_TYPES, verbose_name='Тип проекта')
+    coords = models.CharField(max_length=30, blank=True, default=None, null=True, verbose_name='Геграфические координаты')
     def __unicode__(self):
         return self.title
     class Meta:
@@ -111,6 +114,7 @@ class Event(models.Model):
     description = models.TextField(default='', blank=True, verbose_name='Описание')
     dt_start = models.DateTimeField(default=timezone.now, verbose_name='Дата начала события')
     dt_end = models.DateTimeField(default=None, null=True, blank=True, verbose_name='Дата конца события')
+    coords = models.CharField(max_length=30, blank=True, default=None, null=True, verbose_name='Геграфические координаты')
     def __unicode__(self):
         return self.title
     class Meta:

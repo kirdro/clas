@@ -69,6 +69,7 @@ class AboutCompanySerializer(serializers.ModelSerializer):
             'url_youtube',
             'media',
             'files',
+            'coords',
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
@@ -85,6 +86,7 @@ class NewsSerializer(serializers.ModelSerializer):
             'description',
             'dt',
             'media',
+            'coords',
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
@@ -101,6 +103,7 @@ class WorkItemSerializer(serializers.ModelSerializer):
             'project_type',
             'media',
             'files',
+            'coords',
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
@@ -118,6 +121,7 @@ class EventSerializer(serializers.ModelSerializer):
             'dt_start',
             'dt_end',
             'media',
+            'coords',
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
