@@ -79,8 +79,8 @@ class AboutCompanySerializer(serializers.ModelSerializer):
     def _coords(self, obj):
         c = {'lat': None, 'lon': None}
         if obj.coords:
-            c['lat'] = obj.coords.split(',')[0]
-            c['lon'] = obj.coords.split(',')[1]
+            c['lat'] = obj.coords.split(',')[0].strip()
+            c['lon'] = obj.coords.split(',')[1].strip()
         return c
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -101,8 +101,8 @@ class NewsSerializer(serializers.ModelSerializer):
     def _coords(self, obj):
         c = {'lat': None, 'lon': None}
         if obj.coords:
-            c['lat'] = obj.coords.split(',')[0]
-            c['lon'] = obj.coords.split(',')[1]
+            c['lat'] = obj.coords.split(',')[0].strip()
+            c['lon'] = obj.coords.split(',')[1].strip()
         return c
 
 class WorkItemSerializer(serializers.ModelSerializer):
@@ -127,8 +127,8 @@ class WorkItemSerializer(serializers.ModelSerializer):
     def _coords(self, obj):
         c = {'lat': None, 'lon': None}
         if obj.coords:
-            c['lat'] = obj.coords.split(',')[0]
-            c['lon'] = obj.coords.split(',')[1]
+            c['lat'] = obj.coords.split(',')[0].strip()
+            c['lon'] = obj.coords.split(',')[1].strip()
         return c
 
 class EventSerializer(serializers.ModelSerializer):
@@ -150,8 +150,8 @@ class EventSerializer(serializers.ModelSerializer):
     def _coords(self, obj):
         c = {'lat': None, 'lon': None}
         if obj.coords:
-            c['lat'] = obj.coords.split(',')[0]
-            c['lon'] = obj.coords.split(',')[1]
+            c['lat'] = obj.coords.split(',')[0].strip()
+            c['lon'] = obj.coords.split(',')[1].strip()
         return c
 
 class GaleryItemSerializer(serializers.ModelSerializer):
