@@ -51,6 +51,7 @@ def extract_files(file_items):
 class AboutCompanySerializer(serializers.ModelSerializer):
     media = serializers.SerializerMethodField('_media')
     files = serializers.SerializerMethodField('_files')
+    coords = serializers.SerializerMethodField('_coords')
     class Meta:
         model = models.AboutCompany
         fields = (
@@ -75,9 +76,16 @@ class AboutCompanySerializer(serializers.ModelSerializer):
         return extract_media(obj.media_items.all())
     def _files(self, obj):
         return extract_files(obj.file_items.all())
+    def _coords(self, obj):
+        c = {'lat': None, 'lon': None}
+        if obj.coords:
+            c['lat'] = obj.coords.split(',')[0]
+            c['lon'] = obj.coords.split(',')[1]
+        return c
 
 class NewsSerializer(serializers.ModelSerializer):
     media = serializers.SerializerMethodField('_media')
+    coords = serializers.SerializerMethodField('_coords')
     class Meta:
         model = models.News
         fields = (
@@ -90,10 +98,17 @@ class NewsSerializer(serializers.ModelSerializer):
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
+    def _coords(self, obj):
+        c = {'lat': None, 'lon': None}
+        if obj.coords:
+            c['lat'] = obj.coords.split(',')[0]
+            c['lon'] = obj.coords.split(',')[1]
+        return c
 
 class WorkItemSerializer(serializers.ModelSerializer):
     media = serializers.SerializerMethodField('_media')
     files = serializers.SerializerMethodField('_files')
+    coords = serializers.SerializerMethodField('_coords')
     class Meta:
         model = models.WorkItem
         fields = (
@@ -109,9 +124,16 @@ class WorkItemSerializer(serializers.ModelSerializer):
         return extract_media(obj.media_items.all())
     def _files(self, obj):
         return extract_files(obj.file_items.all())
+    def _coords(self, obj):
+        c = {'lat': None, 'lon': None}
+        if obj.coords:
+            c['lat'] = obj.coords.split(',')[0]
+            c['lon'] = obj.coords.split(',')[1]
+        return c
 
 class EventSerializer(serializers.ModelSerializer):
     media = serializers.SerializerMethodField('_media')
+    coords = serializers.SerializerMethodField('_coords')
     class Meta:
         model = models.Event
         fields = (
@@ -125,6 +147,12 @@ class EventSerializer(serializers.ModelSerializer):
         )
     def _media(self, obj):
         return extract_media(obj.media_items.all())
+    def _coords(self, obj):
+        c = {'lat': None, 'lon': None}
+        if obj.coords:
+            c['lat'] = obj.coords.split(',')[0]
+            c['lon'] = obj.coords.split(',')[1]
+        return c
 
 class GaleryItemSerializer(serializers.ModelSerializer):
     media = serializers.SerializerMethodField('_media')
