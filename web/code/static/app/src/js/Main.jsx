@@ -121,12 +121,12 @@ class Main extends Component {
                                         {/*<Form />*/}
                                     </div>
                                     <div className="row-fluid">
-                                        {/*<div style={{*/}
-                                            {/*width: '100%',*/}
-                                            {/*height: '500px'*/}
-                                        {/*}}>*/}
-                                            {/*<HomeMaps/>*/}
-                                        {/*</div>*/}
+                                        <div style={{
+                                            width: '100%',
+                                            height: '500px'
+                                        }}>
+                                            <HomeMaps/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -42,6 +42,7 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
     },
     update: function (status, data) {
         if (status === 'about') {
+            // console.log('store', data);
             state.about = data;
         }
         else if (status === 'projects') {
@@ -59,7 +60,7 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
             }
             state.projects = data;
             if (state.statusGellary === 'project') {
-                console.log('!!!!!', state.indexGallery);
+                // console.log('!!!!!', state.indexGallery);
                 state.projectsItem = state.projects[state.indexGallery];
             }
         }
@@ -82,7 +83,7 @@ var AppStore = Object.assign({}, EventEmitter.prototype, {
                 }
                 state.events.push(obj);
             }
-            console.log('store', state.events);
+            // console.log('store', state.events);
             // {
             //     'title': 'All Day Event',
             //     'allDay': true,

@@ -4,6 +4,8 @@ import React, {
 } from 'react';
 import GettingStartedGoogleMap from './MapsComponent';
 import Helmet from "react-helmet";
+import AppStore from '../store/store';
+import Actions from '../actions/actions';
 
 class HomeMaps extends Component {
     constructor(props){
@@ -11,13 +13,43 @@ class HomeMaps extends Component {
         this.state = {
             markers: [{
                 position: {
-                    lat: 25.0112183,
-                    lng: 121.52067570000001,
+                    lat: 0,
+                    lng: 0,
                 },
                 key: `Taiwan`,
                 defaultAnimation: 2,
             }],
         };
+        this.internalStatet = {
+            isMounted: false
+        };
+    }
+
+    onChangeState(){
+        if (this.internalStatet.isMounted === true) {
+            if (AppStore.getState().about.length > 0) {
+                // console.log('homemaps', AppStore.getState().about);
+                this.setState({
+                    markers: [{
+                        position: {
+                            lat: +AppStore.getState().about[0].coords.lat,
+                            lng: +AppStore.getState().about[0].coords.lon,
+                        },
+                        key: `Черемшанка`,
+                        defaultAnimation: 2,
+                    }],
+                });
+            }
+        }
+
+    }
+    componentDidMount() {
+        this.internalStatet.isMounted = true;
+        AppStore.addChangeStoreModuleListener(this.onChangeState.bind(this))
+    }
+    componentWillUnmount() {
+        this.internalStatet.isMounted = false;
+        AppStore.removeChangeStoreModuleListener(this.onChangeState.bind(this))
     }
 
     // var handleMapLoad = this.handleMapLoad.bind(this);
@@ -69,25 +101,31 @@ class HomeMaps extends Component {
     }
 
     render() {
-        return (
-            <div style={{height: `100%`}}>
-                <Helmet
-                    title="Getting Started"
-                />
-                <GettingStartedGoogleMap
-                    containerElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    mapElement={
-                        <div style={{ height: `100%` }} />
-                    }
-                    onMapLoad={this.handleMapLoad.bind(this)}
-                    onMapClick={this.handleMapClick.bind(this)}
-                    markers={this.state.markers}
-                    onMarkerRightClick={this.handleMarkerRightClick.bind(this)}
-                />
-            </div>
-        );
+        if (AppStore.getState().about.length > 0) {
+            return (
+                <div style={{height: `100%`}}>
+                    <Helmet
+                        title="Getting Started"
+                    />
+                    <GettingStartedGoogleMap
+                        containerElement={
+                            <div style={{ height: `100%` }} />
+                        }
+                        mapElement={
+                            <div style={{ height: `100%` }} />
+                        }
+                        onMapLoad={this.handleMapLoad.bind(this)}
+                        onMapClick={this.handleMapClick.bind(this)}
+                        markers={this.state.markers}
+                        defaultCenter={this.state.markers[0].position}
+                        onMarkerRightClick={this.handleMarkerRightClick.bind(this)}
+                    />
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 }
 
